@@ -1,0 +1,134 @@
+{
+    "id": "root",
+    "label": "Youssef Ahmed",
+    "type": "root",
+    "children": [
+      {
+        "id": "experience",
+        "label": "Experience",
+        "type": "category",
+        "children": [
+          {
+            "id": "exp-roots-ontology",
+            "label": "Ontology Researcher & Info Architect",
+            "type": "item",
+            "org": "Roots Solutions & Automation",
+            "date": "May – Aug 2026",
+            "tags": ["Ontology", "AI", "Data Modeling"],
+            "children": [
+              { "id": "exp-roots-ontology-1", "label": "Universal ontology as an AI context layer", "type": "detail" },
+              { "id": "exp-roots-ontology-2", "label": "Cross-industry org structure framework for AI", "type": "detail" }
+            ]
+          },
+          {
+            "id": "exp-seen-ai",
+            "label": "AI Analytics Tool Developer",
+            "type": "item",
+            "org": "SEEN Education",
+            "date": "Aug 2026 – Present",
+            "tags": ["Python"],
+            "children": [
+              { "id": "exp-seen-ai-1", "label": "Student performance benchmarking platform", "type": "detail" },
+              { "id": "exp-seen-ai-2", "label": "Automated scale scores & statistical comparisons", "type": "detail" },
+              { "id": "exp-seen-ai-3", "label": "Client-ready visual reports", "type": "detail" }
+            ]
+          },
+          {
+            "id": "exp-seen-devops",
+            "label": "DevOps",
+            "type": "item",
+            "org": "SEEN Education",
+            "date": "Aug 2026 – Present",
+            "tags": ["AWS", "Terraform"],
+            "children": [
+              { "id": "exp-seen-devops-1", "label": "Infrastructure provisioning via Terraform (IaC)", "type": "detail" },
+              { "id": "exp-seen-devops-2", "label": "Middle East multi-school deployment infrastructure", "type": "detail" }
+            ]
+          },
+          {
+            "id": "exp-roots-intern",
+            "label": "Internship",
+            "type": "item",
+            "org": "Roots Solutions & Automation",
+            "date": "Jun 2022 – Jul 2024",
+            "tags": ["Computer Vision", "3D Reconstruction"],
+            "children": [
+              { "id": "exp-roots-intern-1", "label": "Multi-view 3D reconstruction research for a multi-camera rig", "type": "detail" },
+              { "id": "exp-roots-intern-2", "label": "Industrial site visits — Egypt & UAE", "type": "detail" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "projects",
+        "label": "Projects",
+        "type": "category",
+        "children": [
+          {
+            "id": "proj-valet",
+            "label": "Valet Parking App",
+            "type": "item",
+            "date": "Jan – Apr 2026",
+            "tags": ["Java", "JUnit 5", "Java Swing", "UML"],
+            "children": [
+              { "id": "proj-valet-1", "label": "Java Swing GUI + console UI sharing one model", "type": "detail" },
+              { "id": "proj-valet-2", "label": "Check-in, slot allocation, retrieval, real-time wait estimation", "type": "detail" },
+              { "id": "proj-valet-3", "label": "High JUnit 5 coverage across model & persistence layers", "type": "detail" },
+              { "id": "proj-valet-4", "label": "UML class diagram — associations, multiplicities, interfaces", "type": "detail" }
+            ]
+          },
+          {
+            "id": "proj-hr",
+            "label": "HR Screening Automation",
+            "type": "item",
+            "date": "May 2026",
+            "tags": ["n8n", "Docker", "API Automation"],
+            "children": [
+              { "id": "proj-hr-1", "label": "Email-monitoring workflow parses incoming resumes", "type": "detail" },
+              { "id": "proj-hr-2", "label": "Structured candidate data against selection criteria", "type": "detail" }
+            ]
+          },
+          {
+            "id": "proj-parking",
+            "label": "Parking Lot Management Database Automation",
+            "type": "item",
+            "date": "Jun 2026",
+            "tags": ["n8n", "Supabase", "Twilio", "Docker"],
+            "children": [
+              { "id": "proj-parking-1", "label": "n8n workflow updates vehicle records on entry/exit", "type": "detail" },
+              { "id": "proj-parking-2", "label": "Supabase sync for operational data", "type": "detail" },
+              { "id": "proj-parking-3", "label": "Twilio notifications", "type": "detail" },
+              { "id": "proj-parking-4", "label": "Self-hosted n8n in Docker — persistent volumes, env config", "type": "detail" }
+            ]
+          },
+          {
+            "id": "proj-amazon",
+            "label": "Amazon Robotics Hackathon",
+            "type": "item",
+            "date": "Sep 2026",
+            "tags": ["Python", "Optimization"],
+            "children": [
+              { "id": "proj-amazon-1", "label": "14th of 49 teams", "type": "detail" },
+              { "id": "proj-amazon-2", "label": "Benchmarked multiple algorithms minimizing robot step count/runtime", "type": "detail" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "education",
+        "label": "Education",
+        "type": "category",
+        "children": [
+          {
+            "id": "edu-ubc",
+            "label": "BSc Computer Science & Statistics (Combined)",
+            "type": "item",
+            "org": "University of British Columbia",
+            "date": "Sep 2025 – May 2030 (Expected)",
+            "tags": ["88.5% average"],
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
