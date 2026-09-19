@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import * as d3 from "d3";
-import { treeData, type NodeType, type TreeNode } from "@/app/lib/tree";
+import { linkText, treeData, type NodeType, type TreeNode } from "@/app/lib/tree";
 
 /* ---------- traversal algorithms ---------- */
 // BFS uses a queue: visit every node at depth N before any at depth N+1.
@@ -336,9 +336,21 @@ export default function Tree() {
               rel="noopener noreferrer"
               className="mt-3 inline-block font-mono text-[11px] text-indigo-400 underline underline-offset-2 hover:text-indigo-300"
             >
-              {selected.link.replace(/^https?:\/\//, "")} ↗
+              {linkText(selected.link)} ↗
             </a>
           )}
+          {selected.contacts?.map((contact) => (
+            <a
+              key={contact.href}
+              href={contact.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${contact.label}: ${linkText(contact.href)}`}
+              className="mt-3 block font-mono text-[11px] text-indigo-400 underline underline-offset-2 hover:text-indigo-300"
+            >
+              {linkText(contact.href)} ↗
+            </a>
+          ))}
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { treeData, type TreeNode } from "@/app/lib/tree";
+import { linkText, treeData, type TreeNode } from "@/app/lib/tree";
 import CvActions from "./CvActions";
 
 export const metadata: Metadata = {
@@ -9,17 +9,27 @@ export const metadata: Metadata = {
 };
 
 const categories = treeData.children ?? [];
+const contacts = treeData.contacts ?? [];
 
 /* Every outbound link on the CV opens in its own tab so the CV stays put. */
-function ExternalLink({ href, label }: { href: string; label?: string }) {
+function ExternalLink({
+  href,
+  label,
+  title,
+}: {
+  href: string;
+  label?: string;
+  title?: string;
+}) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={title ? `${title}: ${linkText(href)}` : undefined}
       className="font-mono text-xs text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800 print:text-slate-700 print:no-underline"
     >
-      {label ?? href.replace(/^https?:\/\//, "")} ↗
+      {label ?? linkText(href)} ↗
     </a>
   );
 }
@@ -95,6 +105,15 @@ export default function CvPage() {
           <p className="mt-1 font-mono text-xs uppercase tracking-widest text-slate-500">
             Curriculum Vitae
           </p>
+          {contacts.length > 0 && (
+            <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+              {contacts.map((contact) => (
+                <li key={contact.href}>
+                  <ExternalLink href={contact.href} title={contact.label} />
+                </li>
+              ))}
+            </ul>
+          )}
         </header>
 
         {categories.map((category) => (

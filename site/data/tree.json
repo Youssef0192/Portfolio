@@ -2,6 +2,9 @@
     "id": "root",
     "label": "Youssef Ahmed",
     "type": "root",
+    "contacts": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/youssef-ahmed-41ba0a436" }
+    ],
     "children": [
       {
         "id": "experience",
