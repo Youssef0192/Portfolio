@@ -2,21 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import * as d3 from "d3";
-import rawTree from "@/data/tree.json";
-
-type NodeType = "root" | "category" | "item" | "detail";
-
-interface TreeNode {
-  id: string;
-  label: string;
-  type: NodeType;
-  org?: string;
-  date?: string;
-  tags?: string[];
-  children?: TreeNode[];
-}
-
-const treeData = rawTree as unknown as TreeNode;
+import { treeData, type NodeType, type TreeNode } from "@/app/lib/tree";
 
 /* ---------- traversal algorithms ---------- */
 // BFS uses a queue: visit every node at depth N before any at depth N+1.
@@ -214,6 +200,14 @@ export default function Tree() {
         >
           reset
         </button>
+        <a
+          href="/cv/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded border border-indigo-500/60 bg-indigo-500/10 px-3 py-1.5 font-mono text-xs text-indigo-300 transition-colors hover:bg-indigo-500/20 hover:text-white"
+        >
+          cv ↗
+        </a>
       </div>
 
       {/* Traversal status */}
@@ -334,6 +328,16 @@ export default function Tree() {
                 </span>
               ))}
             </div>
+          )}
+          {selected.link && (
+            <a
+              href={selected.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block font-mono text-[11px] text-indigo-400 underline underline-offset-2 hover:text-indigo-300"
+            >
+              {selected.link.replace(/^https?:\/\//, "")} ↗
+            </a>
           )}
         </div>
       )}

@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Content
+
+`data/tree.json` is the single source of truth for both views:
+
+- `/` — the interactive BFS/DFS tree.
+- `/cv` — the same data laid out as a CV sheet. "print / save pdf" prints it
+  with the toolbar hidden and A4 margins applied.
+
+Any node may carry an optional `"link": "https://…"` field. It renders in the
+tree's detail panel and on the CV, and always opens in a new tab.
+
 ## Getting Started
 
 First, run the development server:
