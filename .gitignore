@@ -1,0 +1,16 @@
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/.terraform.lock.hcl
+
+# Node
+site/node_modules/
+site/.next/
+
+# Environment
+.env
+.env.local
+
+# macOS
+.DS_Store
