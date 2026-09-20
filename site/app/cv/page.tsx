@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { categories, linkText, treeData, type TreeNode } from "@/app/lib/tree";
+import {
+  categories,
+  isPlain,
+  linkText,
+  treeData,
+  type TreeNode,
+} from "@/app/lib/tree";
 import CvActions from "./CvActions";
 
 export const metadata: Metadata = {
@@ -122,11 +128,17 @@ export default function CvPage() {
             <h2 className="font-mono text-xs uppercase tracking-widest text-ink-faint">
               {category.label}
             </h2>
-            <div className="mt-3 space-y-5">
-              {(category.children ?? []).map((entry) => (
-                <Entry key={entry.id} node={entry} />
-              ))}
-            </div>
+            {(category.children ?? []).every(isPlain) ? (
+              <p className="mt-2 text-[13px] text-ink-soft">
+                {(category.children ?? []).map((e) => e.label).join(" · ")}
+              </p>
+            ) : (
+              <div className="mt-3 space-y-5">
+                {(category.children ?? []).map((entry) => (
+                  <Entry key={entry.id} node={entry} />
+                ))}
+              </div>
+            )}
           </section>
         ))}
       </div>

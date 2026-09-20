@@ -139,7 +139,13 @@
         "id": "hobbies",
         "label": "Hobbies",
         "type": "category",
-        "children": []
+        "children": [
+          { "id": "hobby-fishing", "label": "Fishing", "type": "item" },
+          { "id": "hobby-spearfishing", "label": "Spearfishing", "type": "item" },
+          { "id": "hobby-cooking", "label": "Cooking", "type": "item" },
+          { "id": "hobby-skiing", "label": "Skiing", "type": "item" },
+          { "id": "hobby-hiking", "label": "Hiking", "type": "item" }
+        ]
       }
     ]
   }

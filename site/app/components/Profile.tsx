@@ -3,7 +3,13 @@
 import { useSyncExternalStore } from "react";
 import Avatar from "@/app/components/Avatar";
 import Tree from "@/app/components/Tree";
-import { categories, linkText, treeData, type TreeNode } from "@/app/lib/tree";
+import {
+  categories,
+  isPlain,
+  linkText,
+  treeData,
+  type TreeNode,
+} from "@/app/lib/tree";
 
 const TREE_TAB = "tree";
 
@@ -195,11 +201,24 @@ export default function Profile() {
             </div>
           </div>
         ) : activeCategory && (activeCategory.children ?? []).length > 0 ? (
-          <div className="space-y-4">
-            {(activeCategory.children ?? []).map((entry) => (
-              <Entry key={entry.id} node={entry} />
-            ))}
-          </div>
+          (activeCategory.children ?? []).every(isPlain) ? (
+            <ul className="flex flex-wrap gap-2.5">
+              {(activeCategory.children ?? []).map((entry) => (
+                <li
+                  key={entry.id}
+                  className="rounded-full border border-rule bg-card px-4 py-2 font-display text-lg text-ink"
+                >
+                  {entry.label}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="space-y-4">
+              {(activeCategory.children ?? []).map((entry) => (
+                <Entry key={entry.id} node={entry} />
+              ))}
+            </div>
+          )
         ) : (
           <p className="rounded-xl border border-dashed border-rule px-5 py-10 text-center text-sm text-ink-faint">
             Still writing this one.

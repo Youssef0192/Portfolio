@@ -31,6 +31,18 @@ export const treeData = rawTree as unknown as TreeNode;
 /** Top-level sections: one tab on the front page, one section on the CV. */
 export const categories = treeData.children ?? [];
 
+/** An entry with nothing but a name — a hobby, not a job. Those read better
+ *  as a compact list than as a card or a CV block of their own. */
+export function isPlain(node: TreeNode): boolean {
+  return (
+    !node.org &&
+    !node.date &&
+    !node.link &&
+    !(node.tags ?? []).length &&
+    !(node.children ?? []).length
+  );
+}
+
 /** Link text that stays readable on screen and useful once printed. */
 export function linkText(href: string): string {
   return href
