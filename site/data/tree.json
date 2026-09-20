@@ -154,7 +154,19 @@
               { "src": "/hobbies/fishing-5.jpg", "alt": "A mixed catch of snapper, grouper and king mackerel laid out on a boat deck" }
             ]
           },
-          { "id": "hobby-cooking", "label": "Cooking", "type": "item", "icon": "cooking", "images": [] },
+          {
+            "id": "hobby-cooking",
+            "label": "Cooking",
+            "type": "item",
+            "icon": "cooking",
+            "images": [
+              { "src": "/hobbies/cooking-1.jpg", "alt": "A whole roasted lamb over rice, family-style on a large platter" },
+              { "src": "/hobbies/cooking-2.jpg", "alt": "Rack of lamb roasted over rice with grilled scallions" },
+              { "src": "/hobbies/cooking-3.jpg", "alt": "A sliced steak, seared and resting on a board" },
+              { "src": "/hobbies/cooking-4.jpg", "alt": "Sliced steak over a vegetable lo mein in the pan" },
+              { "src": "/hobbies/cooking-5.jpg", "alt": "Roast chicken over spiced rice with almonds and grilled peppers" }
+            ]
+          },
           {
             "id": "hobby-skiing",
             "label": "Skiing",
