@@ -2,6 +2,11 @@
     "id": "root",
     "label": "Youssef Ahmed",
     "type": "root",
+    "photo": "/profile.jpg",
+    "bio": "Computer Science & Statistics student at UBC. I build data and AI tooling \u2014 benchmarking platforms for schools, infrastructure that provisions itself, and the occasional automation that saves someone an afternoon.",
+    "contacts": [
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/youssef-ahmed-41ba0a436" }
+    ],
     "children": [
       {
         "id": "experience",
@@ -128,6 +133,18 @@
             "tags": ["88.5% average"],
             "children": []
           }
+        ]
+      },
+      {
+        "id": "hobbies",
+        "label": "Hobbies",
+        "type": "category",
+        "children": [
+          { "id": "hobby-fishing", "label": "Fishing", "type": "item" },
+          { "id": "hobby-spearfishing", "label": "Spearfishing", "type": "item" },
+          { "id": "hobby-cooking", "label": "Cooking", "type": "item" },
+          { "id": "hobby-skiing", "label": "Skiing", "type": "item" },
+          { "id": "hobby-hiking", "label": "Hiking", "type": "item" }
         ]
       }
     ]

@@ -1,5 +1,5 @@
-import Tree from "@/app/components/Tree";
+import Profile from "@/app/components/Profile";
 
 export default function Home() {
-  return <Tree />;
+  return <Profile />;
 }
