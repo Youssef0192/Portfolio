@@ -141,7 +141,19 @@
         "label": "Hobbies",
         "type": "category",
         "children": [
-          { "id": "hobby-fishing", "label": "Fishing", "type": "item", "icon": "fishing", "images": [] },
+          {
+            "id": "hobby-fishing",
+            "label": "Fishing",
+            "type": "item",
+            "icon": "fishing",
+            "images": [
+              { "src": "/hobbies/fishing-1.jpg", "alt": "Holding up a large barracuda caught off the back of a boat" },
+              { "src": "/hobbies/fishing-2.jpg", "alt": "A night trip's haul of tuna and grouper laid out on deck" },
+              { "src": "/hobbies/fishing-3.jpg", "alt": "A fishing kayak rigged with two rods, pulled up on the beach" },
+              { "src": "/hobbies/fishing-4.jpg", "alt": "A squid held up on a jig against the shoreline" },
+              { "src": "/hobbies/fishing-5.jpg", "alt": "A mixed catch of snapper, grouper and king mackerel laid out on a boat deck" }
+            ]
+          },
           { "id": "hobby-cooking", "label": "Cooking", "type": "item", "icon": "cooking", "images": [] },
           {
             "id": "hobby-skiing",
