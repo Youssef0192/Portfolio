@@ -143,7 +143,19 @@
         "children": [
           { "id": "hobby-fishing", "label": "Fishing", "type": "item", "icon": "fishing", "images": [] },
           { "id": "hobby-cooking", "label": "Cooking", "type": "item", "icon": "cooking", "images": [] },
-          { "id": "hobby-skiing", "label": "Skiing", "type": "item", "icon": "skiing", "images": [] },
+          {
+            "id": "hobby-skiing",
+            "label": "Skiing",
+            "type": "item",
+            "icon": "skiing",
+            "images": [
+              { "src": "/hobbies/skiing-1.jpg", "alt": "Riding the chairlift over snow-loaded trees at dusk" },
+              { "src": "/hobbies/skiing-2.jpg", "alt": "Helmet and goggles at the top of a run, peaks above the clouds behind" },
+              { "src": "/hobbies/skiing-3.jpg", "alt": "Standing on a ridge in ski boots, the range stretching out behind" },
+              { "src": "/hobbies/skiing-4.jpg", "alt": "At the summit cross, clouds sitting below the peaks" },
+              { "src": "/hobbies/skiing-5.jpg", "alt": "Looking back from the top of a groomed run under a clear sky" }
+            ]
+          },
           {
             "id": "hobby-hiking",
             "label": "Hiking",
