@@ -132,7 +132,13 @@
             "org": "University of British Columbia",
             "date": "Sep 2025 – May 2030 (Expected)",
             "tags": ["88.5% average"],
-            "children": []
+            "children": [
+              { "id": "edu-ubc-1", "label": "Computation, Programs, and Programming", "type": "detail" },
+              { "id": "edu-ubc-2", "label": "Models of Computation", "type": "detail" },
+              { "id": "edu-ubc-3", "label": "Software Construction", "type": "detail" },
+              { "id": "edu-ubc-4", "label": "Introduction to Computer Systems", "type": "detail" },
+              { "id": "edu-ubc-5", "label": "Basic Algorithms and Data Structures", "type": "detail" }
+            ]
           }
         ]
       },
