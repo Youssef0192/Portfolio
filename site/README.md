@@ -14,9 +14,9 @@ Editing the data:
 - **Add a tab** — add a top-level `category` node. Tabs follow the file order.
 - **Add a link** — any node may carry `"link": "https://…"`. It renders in the
   tree's detail panel, on the cards and on the CV, and always opens in a new tab.
-- **Profile picture** — drop your image at `public/profile.jpg` (the path in the
-  root node's `photo` field). Square crops look best. Until the file exists the
-  avatar shows initials, so nothing looks broken.
+- **Profile picture** — `public/profile.jpg` (the path in the root node's
+  `photo` field), square and around 512px. Replace the file to change it; if it
+  is ever missing the avatar falls back to initials rather than breaking.
 - **Intro** — the root node's `bio`.
 
 ## Getting Started
