@@ -5,7 +5,8 @@
     "photo": "/profile.jpg",
     "bio": "Computer Science & Statistics student at UBC. I build data and AI tooling \u2014 benchmarking platforms for schools, infrastructure that provisions itself, and the occasional automation that saves someone an afternoon.",
     "contacts": [
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/youssef-ahmed-41ba0a436" }
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/youssef-ahmed-41ba0a436" },
+      { "label": "GitHub", "href": "https://github.com/Youssef0192" }
     ],
     "children": [
       {
@@ -140,11 +141,34 @@
         "label": "Hobbies",
         "type": "category",
         "children": [
-          { "id": "hobby-fishing", "label": "Fishing", "type": "item" },
-          { "id": "hobby-spearfishing", "label": "Spearfishing", "type": "item" },
-          { "id": "hobby-cooking", "label": "Cooking", "type": "item" },
-          { "id": "hobby-skiing", "label": "Skiing", "type": "item" },
-          { "id": "hobby-hiking", "label": "Hiking", "type": "item" }
+          { "id": "hobby-fishing", "label": "Fishing", "type": "item", "icon": "fishing", "images": [] },
+          { "id": "hobby-cooking", "label": "Cooking", "type": "item", "icon": "cooking", "images": [] },
+          {
+            "id": "hobby-skiing",
+            "label": "Skiing",
+            "type": "item",
+            "icon": "skiing",
+            "images": [
+              { "src": "/hobbies/skiing-1.jpg", "alt": "Riding the chairlift over snow-loaded trees at dusk" },
+              { "src": "/hobbies/skiing-2.jpg", "alt": "Helmet and goggles at the top of a run, peaks above the clouds behind" },
+              { "src": "/hobbies/skiing-3.jpg", "alt": "Standing on a ridge in ski boots, the range stretching out behind" },
+              { "src": "/hobbies/skiing-4.jpg", "alt": "At the summit cross, clouds sitting below the peaks" },
+              { "src": "/hobbies/skiing-5.jpg", "alt": "Looking back from the top of a groomed run under a clear sky" }
+            ]
+          },
+          {
+            "id": "hobby-hiking",
+            "label": "Hiking",
+            "type": "item",
+            "icon": "hiking",
+            "images": [
+              { "src": "/hobbies/hiking-1.jpg", "alt": "At a lookout over the water, the city skyline in the distance" },
+              { "src": "/hobbies/hiking-2.jpg", "alt": "Standing on a boulder at the edge of a river, looking upstream" },
+              { "src": "/hobbies/hiking-3.jpg", "alt": "An emerald pool tucked into the rock at the bottom of a canyon" },
+              { "src": "/hobbies/hiking-4.jpg", "alt": "A waterfall at the head of a rocky creek bed" },
+              { "src": "/hobbies/hiking-5.jpg", "alt": "A river running white through a mossy canyon" }
+            ]
+          }
         ]
       }
     ]

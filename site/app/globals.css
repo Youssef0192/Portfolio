@@ -33,15 +33,3 @@ body {
   color: var(--ink);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
-
-/* Printing the CV page: paper margins and ink-friendly colours. */
-@media print {
-  @page {
-    margin: 16mm;
-  }
-
-  body {
-    background: #ffffff;
-    color: #0f172a;
-  }
-}

@@ -8,6 +8,12 @@ export interface ContactLink {
   href: string;
 }
 
+export interface HobbyImage {
+  /** Path to a photo in /public. */
+  src: string;
+  alt?: string;
+}
+
 export interface TreeNode {
   id: string;
   label: string;
@@ -23,6 +29,10 @@ export interface TreeNode {
   photo?: string;
   /** Root only: contact links. */
   contacts?: ContactLink[];
+  /** Hobbies only: which icon to draw, see HobbyIcon. */
+  icon?: string;
+  /** Hobbies only: photos for the slideshow. */
+  images?: HobbyImage[];
   children?: TreeNode[];
 }
 
