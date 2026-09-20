@@ -144,7 +144,19 @@
           { "id": "hobby-fishing", "label": "Fishing", "type": "item", "icon": "fishing", "images": [] },
           { "id": "hobby-cooking", "label": "Cooking", "type": "item", "icon": "cooking", "images": [] },
           { "id": "hobby-skiing", "label": "Skiing", "type": "item", "icon": "skiing", "images": [] },
-          { "id": "hobby-hiking", "label": "Hiking", "type": "item", "icon": "hiking", "images": [] }
+          {
+            "id": "hobby-hiking",
+            "label": "Hiking",
+            "type": "item",
+            "icon": "hiking",
+            "images": [
+              { "src": "/hobbies/hiking-1.jpg", "alt": "At a lookout over the water, the city skyline in the distance" },
+              { "src": "/hobbies/hiking-2.jpg", "alt": "Standing on a boulder at the edge of a river, looking upstream" },
+              { "src": "/hobbies/hiking-3.jpg", "alt": "An emerald pool tucked into the rock at the bottom of a canyon" },
+              { "src": "/hobbies/hiking-4.jpg", "alt": "A waterfall at the head of a rocky creek bed" },
+              { "src": "/hobbies/hiking-5.jpg", "alt": "A river running white through a mossy canyon" }
+            ]
+          }
         ]
       }
     ]

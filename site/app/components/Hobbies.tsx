@@ -73,7 +73,7 @@ export default function Hobbies({ hobbies }: { hobbies: TreeNode[] }) {
         onBlur={() => setPaused(false)}
         className="mt-6 overflow-hidden rounded-xl border border-rule bg-card"
       >
-        <div className="relative aspect-[4/3] bg-paper-sunk sm:aspect-[16/9]">
+        <div className="relative aspect-[4/5] overflow-hidden bg-paper-sunk sm:aspect-[3/2]">
           {count === 0 ? (
             <div className="flex size-full flex-col items-center justify-center gap-3 text-ink-faint">
               <HobbyIcon name={hobby.icon} className="size-12" />
@@ -81,17 +81,32 @@ export default function Hobbies({ hobbies }: { hobbies: TreeNode[] }) {
             </div>
           ) : (
             images.map((image, index) => (
-              /* eslint-disable-next-line @next/next/no-img-element -- static export, no image loader */
-              <img
+              /* Portrait and landscape photos share one frame: the photo is
+                 fitted whole, and a blurred copy of it fills what is left
+                 rather than letterboxing it against flat colour. */
+              <div
                 key={image.src}
-                src={image.src}
-                alt={image.alt ?? `${hobby.label} — photo ${index + 1}`}
-                loading={index === 0 ? "eager" : "lazy"}
                 aria-hidden={index !== slide}
-                className={`absolute inset-0 size-full object-cover transition-opacity duration-500 ${
+                className={`absolute inset-0 transition-opacity duration-500 ${
                   index === slide ? "opacity-100" : "opacity-0"
                 }`}
-              />
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image loader */}
+                <img
+                  src={image.src}
+                  alt=""
+                  aria-hidden
+                  loading={index === 0 ? "eager" : "lazy"}
+                  className="absolute inset-0 size-full scale-110 object-cover blur-xl brightness-90"
+                />
+                {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image loader */}
+                <img
+                  src={image.src}
+                  alt={image.alt ?? `${hobby.label} — photo ${index + 1}`}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  className="absolute inset-0 size-full object-contain"
+                />
+              </div>
             ))
           )}
 
