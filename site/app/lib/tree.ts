@@ -17,12 +17,19 @@ export interface TreeNode {
   tags?: string[];
   /** Optional external URL. Always rendered as a new-tab link. */
   link?: string;
-  /** Contact links, carried by the root node. */
+  /** Root only: short intro shown under the name. */
+  bio?: string;
+  /** Root only: path to the profile picture in /public. */
+  photo?: string;
+  /** Root only: contact links. */
   contacts?: ContactLink[];
   children?: TreeNode[];
 }
 
 export const treeData = rawTree as unknown as TreeNode;
+
+/** Top-level sections: one tab on the front page, one section on the CV. */
+export const categories = treeData.children ?? [];
 
 /** Link text that stays readable on screen and useful once printed. */
 export function linkText(href: string): string {
@@ -30,4 +37,14 @@ export function linkText(href: string): string {
     .replace(/^https?:\/\//, "")
     .replace(/^www\./, "")
     .replace(/\/$/, "");
+}
+
+/** "Youssef Ahmed" -> "YA", used until a profile picture is dropped in. */
+export function initials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase() ?? "")
+    .join("");
 }

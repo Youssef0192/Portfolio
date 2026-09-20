@@ -30,26 +30,38 @@ function dfsOrder(root: TreeNode): string[] {
 
 /* ---------- visual config ---------- */
 const NODE_STYLE: Record<NodeType, { r: number; fill: string; font: number }> = {
-  root: { r: 9, fill: "#818cf8", font: 14 },
-  category: { r: 7, fill: "#38bdf8", font: 13 },
-  item: { r: 5.5, fill: "#34d399", font: 12 },
-  detail: { r: 4, fill: "#64748b", font: 11 },
+  root: { r: 9, fill: "#4338ca", font: 14 },
+  category: { r: 7, fill: "#0369a1", font: 13 },
+  item: { r: 5.5, fill: "#047857", font: 12 },
+  detail: { r: 4, fill: "#a8a29e", font: 11 },
 };
 
-const SIBLING_GAP = 34;
-const DEPTH_GAP = 300;
+const VISITED = "#c2410c";
+const LINK_IDLE = "#e9e0d0";
+const LABEL_IDLE = "#57503f";
+const LABEL_VISITED = "#241f1a";
+
+const SIBLING_GAP = 30;
+const DEPTH_GAP_MAX = 300;
 const STEP_MS = 320;
+/* Rough room for a label sitting to the right of its node, used when fitting. */
+const LABEL_ALLOWANCE = 230;
+const FIT_PAD = 24;
 
 export default function Tree() {
+  const wrapRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const gRef = useRef<SVGGElement>(null);
 
-  const [size, setSize] = useState({ width: 1200, height: 800 });
+  const [size, setSize] = useState({ width: 900, height: 512 });
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
   const [selected, setSelected] = useState<TreeNode | null>(null);
   const [mode, setMode] = useState<"bfs" | "dfs">("bfs");
   const [visitedIndex, setVisitedIndex] = useState<number | null>(null);
   const [transform, setTransform] = useState(d3.zoomIdentity);
+  const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  /* Once the reader pans or zooms, stop re-fitting under them. */
+  const readerTookOver = useRef(false);
 
   /* Start collapsed below the category level so the first view is readable. */
   useEffect(() => {
@@ -62,46 +74,88 @@ export default function Tree() {
     setCollapsed(initial);
   }, []);
 
-  /* Track viewport size so the tree re-centres on resize. */
+  /* Track the container's box so the tree fits whatever panel holds it. */
   useEffect(() => {
-    const update = () =>
-      setSize({ width: window.innerWidth, height: window.innerHeight });
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      setSize({ width, height });
+    });
+    observer.observe(wrap);
+    return () => observer.disconnect();
   }, []);
+
+  /* Columns tighten on narrow panels so four levels still fit. */
+  const depthGap = Math.max(
+    150,
+    Math.min(DEPTH_GAP_MAX, (size.width - LABEL_ALLOWANCE - FIT_PAD * 2) / 3)
+  );
 
   /* D3 does the layout maths; React renders the result. */
   const root = useMemo(() => {
     const hierarchy = d3.hierarchy<TreeNode>(treeData, (d) =>
       collapsed.has(d.id) ? undefined : d.children
     );
-    d3.tree<TreeNode>().nodeSize([SIBLING_GAP, DEPTH_GAP])(hierarchy);
+    d3.tree<TreeNode>().nodeSize([SIBLING_GAP, depthGap])(hierarchy);
     return hierarchy as d3.HierarchyPointNode<TreeNode>;
-  }, [collapsed]);
+  }, [collapsed, depthGap]);
 
   const nodes = useMemo(() => root.descendants(), [root]);
   const links = useMemo(() => root.links(), [root]);
 
-  /* Centre the tree on first paint and whenever the viewport changes. */
-  useEffect(() => {
-    const xs = nodes.map((n) => n.x);
-    const mid = (Math.min(...xs) + Math.max(...xs)) / 2;
-    setTransform(
-      d3.zoomIdentity.translate(140, size.height / 2 - mid)
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [size.height]);
-
-  /* Pan and zoom. */
+  /* Pan and zoom. Driving React state from d3 keeps one source of truth for
+     the transform, so programmatic fits and reader gestures can't disagree. */
   useEffect(() => {
     if (!svgRef.current) return;
     const zoom = d3
       .zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.3, 2.5])
-      .on("zoom", (event) => setTransform(event.transform));
+      .on("zoom", (event) => {
+        // sourceEvent is null when the fit below sets the transform itself.
+        if (event.sourceEvent) readerTookOver.current = true;
+        setTransform(event.transform);
+      });
+    zoomRef.current = zoom;
     d3.select(svgRef.current).call(zoom);
   }, []);
+
+  /* Fit whatever is currently expanded inside the panel, so nothing sits off
+     the edge as the traversal opens nodes. */
+  useEffect(() => {
+    const svg = svgRef.current;
+    const zoom = zoomRef.current;
+    if (!svg || !zoom || readerTookOver.current) return;
+    if (size.width === 0 || size.height === 0 || nodes.length === 0) return;
+
+    const minX = Math.min(...nodes.map((n) => n.x));
+    const maxX = Math.max(...nodes.map((n) => n.x));
+    const minY = Math.min(...nodes.map((n) => n.y));
+    const maxY = Math.max(...nodes.map((n) => n.y));
+    const contentW = maxY - minY + LABEL_ALLOWANCE;
+    const contentH = Math.max(maxX - minX, 1);
+
+    /* Floor the fit: past this, labels stop being readable and panning is the
+       better answer than shrinking further. */
+    const k = Math.max(
+      0.65,
+      Math.min(
+        1,
+        (size.width - FIT_PAD * 2) / contentW,
+        (size.height - FIT_PAD * 2) / contentH
+      )
+    );
+
+    d3.select(svg).call(
+      zoom.transform,
+      d3.zoomIdentity
+        .translate(
+          (size.width - contentW * k) / 2 - minY * k,
+          (size.height - contentH * k) / 2 - minX * k
+        )
+        .scale(k)
+    );
+  }, [nodes, size]);
 
   /* The traversal order over the FULL tree, not just what's visible. */
   const traversal = useMemo(
@@ -136,12 +190,14 @@ export default function Tree() {
   const running = visitedIndex !== null;
 
   const runTraversal = useCallback(() => {
+    readerTookOver.current = false;
     setSelected(null);
     setCollapsed(new Set());
     setVisitedIndex(0);
   }, []);
 
   const resetTree = useCallback(() => {
+    readerTookOver.current = false;
     setVisitedIndex(null);
     setSelected(null);
     const initial = new Set<string>();
@@ -168,10 +224,10 @@ export default function Tree() {
     .y((d) => d.x);
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-slate-950">
+    <div ref={wrapRef} className="relative size-full overflow-hidden bg-card">
       {/* Controls */}
-      <div className="absolute left-6 top-6 z-10 flex items-center gap-2">
-        <div className="flex overflow-hidden rounded border border-slate-700">
+      <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
+        <div className="flex overflow-hidden rounded border border-rule">
           {(["bfs", "dfs"] as const).map((m) => (
             <button
               key={m}
@@ -179,8 +235,8 @@ export default function Tree() {
               disabled={running}
               className={`px-3 py-1.5 font-mono text-xs uppercase transition-colors ${
                 mode === m
-                  ? "bg-indigo-500 text-white"
-                  : "bg-slate-900 text-slate-400 hover:text-slate-200"
+                  ? "bg-accent text-white"
+                  : "bg-paper text-ink-faint hover:text-ink"
               } disabled:opacity-40`}
             >
               {m}
@@ -190,29 +246,21 @@ export default function Tree() {
         <button
           onClick={runTraversal}
           disabled={running}
-          className="rounded border border-slate-700 bg-slate-900 px-3 py-1.5 font-mono text-xs text-slate-300 hover:text-white disabled:opacity-40"
+          className="rounded border border-rule bg-paper px-3 py-1.5 font-mono text-xs text-ink-soft hover:text-ink disabled:opacity-40"
         >
           {running ? "running…" : "run"}
         </button>
         <button
           onClick={resetTree}
-          className="rounded border border-slate-700 bg-slate-900 px-3 py-1.5 font-mono text-xs text-slate-400 hover:text-white"
+          className="rounded border border-rule bg-paper px-3 py-1.5 font-mono text-xs text-ink-faint hover:text-ink"
         >
           reset
         </button>
-        <a
-          href="/cv/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded border border-indigo-500/60 bg-indigo-500/10 px-3 py-1.5 font-mono text-xs text-indigo-300 transition-colors hover:bg-indigo-500/20 hover:text-white"
-        >
-          cv ↗
-        </a>
       </div>
 
       {/* Traversal status */}
       {running && (
-        <div className="absolute bottom-6 left-6 z-10 font-mono text-xs text-slate-500">
+        <div className="absolute bottom-4 left-4 z-10 font-mono text-xs text-ink-faint">
           {mode.toUpperCase()} · visiting {visitedIndex! + 1} / {traversal.length}
         </div>
       )}
@@ -237,7 +285,7 @@ export default function Tree() {
                 key={`${link.source.data.id}-${link.target.data.id}`}
                 d={linkPath(link) ?? undefined}
                 fill="none"
-                stroke={active ? "#6366f1" : "#1e293b"}
+                stroke={active ? VISITED : LINK_IDLE}
                 strokeWidth={active ? 1.8 : 1.2}
                 className="transition-all duration-300"
               />
@@ -265,15 +313,15 @@ export default function Tree() {
                   <circle
                     r={style.r + 7}
                     fill="none"
-                    stroke="#818cf8"
+                    stroke={VISITED}
                     strokeWidth={1.5}
                     opacity={0.7}
                   />
                 )}
                 <circle
                   r={style.r}
-                  fill={isVisited ? "#6366f1" : style.fill}
-                  stroke={isCollapsed ? "#e2e8f0" : "#0f172a"}
+                  fill={isVisited ? VISITED : style.fill}
+                  stroke={isCollapsed ? "#241f1a" : "#ffffff"}
                   strokeWidth={isCollapsed ? 2 : 1.5}
                   className="transition-all duration-300"
                 />
@@ -281,12 +329,16 @@ export default function Tree() {
                   x={style.r + 10}
                   dy="0.32em"
                   fontSize={style.font}
-                  fill={isVisited ? "#e2e8f0" : "#94a3b8"}
+                  fill={isVisited ? LABEL_VISITED : LABEL_IDLE}
+                  /* Halo so link lines don't strike through the text. */
+                  stroke="#ffffff"
+                  strokeWidth={3}
+                  paintOrder="stroke"
                   className="select-none transition-colors duration-300"
                 >
                   {node.data.label}
                   {hasChildren && isCollapsed && (
-                    <tspan fill="#475569"> +{node.data.children!.length}</tspan>
+                    <tspan fill="#a8a29e"> +{node.data.children!.length}</tspan>
                   )}
                 </text>
               </g>
@@ -297,23 +349,23 @@ export default function Tree() {
 
       {/* Detail panel */}
       {selected && (
-        <div className="absolute right-6 top-6 z-10 w-80 rounded-lg border border-slate-800 bg-slate-900/95 p-4 backdrop-blur">
+        <div className="absolute right-4 top-4 z-10 w-72 rounded-lg border border-rule bg-paper/95 p-4 shadow-sm backdrop-blur">
           <div className="mb-3 flex items-start justify-between gap-3">
-            <h2 className="text-sm font-medium leading-snug text-slate-100">
+            <h2 className="text-sm font-medium leading-snug text-ink">
               {selected.label}
             </h2>
             <button
               onClick={() => setSelected(null)}
-              className="shrink-0 text-xs text-slate-600 hover:text-slate-300"
+              className="shrink-0 text-xs text-ink-faint hover:text-ink"
             >
               ✕
             </button>
           </div>
           {selected.org && (
-            <p className="text-xs text-slate-400">{selected.org}</p>
+            <p className="text-xs text-accent">{selected.org}</p>
           )}
           {selected.date && (
-            <p className="mt-0.5 font-mono text-xs text-slate-600">
+            <p className="mt-0.5 font-mono text-xs text-ink-faint">
               {selected.date}
             </p>
           )}
@@ -322,7 +374,7 @@ export default function Tree() {
               {selected.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded bg-slate-800 px-2 py-0.5 font-mono text-[11px] text-slate-400"
+                  className="rounded-full bg-paper-sunk px-2 py-0.5 font-mono text-[11px] text-ink-soft"
                 >
                   {tag}
                 </span>
@@ -334,7 +386,7 @@ export default function Tree() {
               href={selected.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block font-mono text-[11px] text-indigo-400 underline underline-offset-2 hover:text-indigo-300"
+              className="mt-3 inline-block font-mono text-[11px] text-accent underline underline-offset-2 hover:opacity-70"
             >
               {linkText(selected.link)} ↗
             </a>
@@ -346,7 +398,7 @@ export default function Tree() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${contact.label}: ${linkText(contact.href)}`}
-              className="mt-3 block font-mono text-[11px] text-indigo-400 underline underline-offset-2 hover:text-indigo-300"
+              className="mt-3 block font-mono text-[11px] text-accent underline underline-offset-2 hover:opacity-70"
             >
               {linkText(contact.href)} ↗
             </a>

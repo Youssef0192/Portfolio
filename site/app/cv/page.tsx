@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { linkText, treeData, type TreeNode } from "@/app/lib/tree";
+import { categories, linkText, treeData, type TreeNode } from "@/app/lib/tree";
 import CvActions from "./CvActions";
 
 export const metadata: Metadata = {
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   description: `Curriculum vitae of ${treeData.label}.`,
 };
 
-const categories = treeData.children ?? [];
+/* An empty section would print as a stray heading. */
+const sections = categories.filter((c) => (c.children ?? []).length > 0);
 const contacts = treeData.contacts ?? [];
 
 /* Every outbound link on the CV opens in its own tab so the CV stays put. */
@@ -27,7 +28,7 @@ function ExternalLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={title ? `${title}: ${linkText(href)}` : undefined}
-      className="font-mono text-xs text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800 print:text-slate-700 print:no-underline"
+      className="font-mono text-xs text-accent underline underline-offset-2 hover:opacity-70 print:text-ink-soft print:no-underline"
     >
       {label ?? linkText(href)} ↗
     </a>
@@ -40,20 +41,20 @@ function Entry({ node }: { node: TreeNode }) {
   return (
     <article className="break-inside-avoid">
       <header className="flex flex-wrap items-baseline justify-between gap-x-4">
-        <h3 className="text-[15px] font-semibold text-slate-900">
+        <h3 className="text-[15px] font-semibold text-ink">
           {node.label}
         </h3>
         {node.date && (
-          <span className="font-mono text-xs text-slate-500">{node.date}</span>
+          <span className="font-mono text-xs text-ink-faint">{node.date}</span>
         )}
       </header>
 
       {node.org && (
-        <p className="mt-0.5 text-[13px] italic text-slate-600">{node.org}</p>
+        <p className="mt-0.5 text-[13px] italic text-ink-soft">{node.org}</p>
       )}
 
       {details.length > 0 && (
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-[13px] leading-relaxed text-slate-700 marker:text-slate-400">
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-[13px] leading-relaxed text-ink-soft marker:text-ink-faint">
           {details.map((detail) => (
             <li key={detail.id}>{detail.label}</li>
           ))}
@@ -65,7 +66,7 @@ function Entry({ node }: { node: TreeNode }) {
           {node.tags.map((tag) => (
             <li
               key={tag}
-              className="rounded bg-slate-100 px-2 py-0.5 font-mono text-[11px] text-slate-600 print:border print:border-slate-300 print:bg-transparent"
+              className="rounded bg-paper-sunk px-2 py-0.5 font-mono text-[11px] text-ink-soft print:border print:border-rule print:bg-transparent"
             >
               {tag}
             </li>
@@ -84,25 +85,25 @@ function Entry({ node }: { node: TreeNode }) {
 
 export default function CvPage() {
   return (
-    <main className="min-h-screen bg-slate-950 px-4 py-10 print:bg-white print:p-0">
+    <main className="min-h-screen bg-paper-sunk px-4 py-10 print:bg-white print:p-0">
       {/* Toolbar — screen only, never printed. */}
       <nav className="mx-auto mb-6 flex max-w-3xl items-center justify-between gap-3 print:hidden">
         <Link
           href="/"
-          className="rounded border border-slate-700 bg-slate-900 px-3 py-1.5 font-mono text-xs text-slate-400 transition-colors hover:text-white"
+          className="rounded-full border border-rule bg-paper px-4 py-1.5 font-mono text-xs text-ink-faint transition-colors hover:text-ink"
         >
-          ← tree
+          ← back
         </Link>
         <CvActions />
       </nav>
 
       {/* The CV itself, rendered as a sheet of paper. */}
-      <div className="mx-auto max-w-3xl rounded-lg bg-white px-10 py-12 shadow-2xl shadow-black/40 print:max-w-none print:rounded-none print:p-0 print:shadow-none">
-        <header className="border-b border-slate-200 pb-4">
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+      <div className="mx-auto max-w-3xl rounded-xl bg-card px-10 py-12 shadow-[0_4px_30px_rgba(36,31,26,0.10)] print:max-w-none print:rounded-none print:p-0 print:shadow-none">
+        <header className="border-b border-rule pb-4">
+          <h1 className="font-display text-3xl text-ink">
             {treeData.label}
           </h1>
-          <p className="mt-1 font-mono text-xs uppercase tracking-widest text-slate-500">
+          <p className="mt-1 font-mono text-xs uppercase tracking-widest text-ink-faint">
             Curriculum Vitae
           </p>
           {contacts.length > 0 && (
@@ -116,9 +117,9 @@ export default function CvPage() {
           )}
         </header>
 
-        {categories.map((category) => (
+        {sections.map((category) => (
           <section key={category.id} className="mt-7">
-            <h2 className="font-mono text-xs uppercase tracking-widest text-slate-500">
+            <h2 className="font-mono text-xs uppercase tracking-widest text-ink-faint">
               {category.label}
             </h2>
             <div className="mt-3 space-y-5">

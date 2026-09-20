@@ -2,14 +2,22 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Content
 
-`data/tree.json` is the single source of truth for both views:
+`data/tree.json` is the single source of truth for every view:
 
-- `/` — the interactive BFS/DFS tree.
+- `/` — profile header plus a tab per top-level section, with the BFS/DFS
+  tree as the last tab. Tabs are deep-linkable: `/#projects`, `/#tree`, …
 - `/cv` — the same data laid out as a CV sheet. "print / save pdf" prints it
-  with the toolbar hidden and A4 margins applied.
+  with the toolbar hidden and A4 margins applied. Empty sections are skipped.
 
-Any node may carry an optional `"link": "https://…"` field. It renders in the
-tree's detail panel and on the CV, and always opens in a new tab.
+Editing the data:
+
+- **Add a tab** — add a top-level `category` node. Tabs follow the file order.
+- **Add a link** — any node may carry `"link": "https://…"`. It renders in the
+  tree's detail panel, on the cards and on the CV, and always opens in a new tab.
+- **Profile picture** — drop your image at `public/profile.jpg` (the path in the
+  root node's `photo` field). Square crops look best. Until the file exists the
+  avatar shows initials, so nothing looks broken.
+- **Intro** — the root node's `bio`.
 
 ## Getting Started
 
