@@ -6,14 +6,20 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 - `/` — profile header plus a tab per top-level section, with the BFS/DFS
   tree as the last tab. Tabs are deep-linkable: `/#projects`, `/#tree`, …
-- `/cv` — the same data laid out as a CV sheet. "print / save pdf" prints it
-  with the toolbar hidden and A4 margins applied. Empty sections are skipped.
+- "read my cv" in the header opens `public/cv.pdf` — the real CV file, served
+  as-is. Replace that file to publish a new version.
 
 Editing the data:
 
 - **Add a tab** — add a top-level `category` node. Tabs follow the file order.
 - **Add a link** — any node may carry `"link": "https://…"`. It renders in the
-  tree's detail panel, on the cards and on the CV, and always opens in a new tab.
+  tree's detail panel and on the cards, and always opens in a new tab.
+- **Contact links** — the root node's `contacts` (LinkedIn, GitHub, …); they sit
+  next to the CV button.
+- **Hobby photos** — each hobby node carries an `icon` (`fishing`, `cooking`,
+  `skiing`, `hiking` — drawn by `app/components/HobbyIcon.tsx`) and an `images`
+  list of `{ "src": "/hobbies/…", "alt": "…" }`. The photos play as a slideshow
+  under the icons; a hobby with no photos yet shows its icon instead.
 - **Profile picture** — `public/profile.jpg` (the path in the root node's
   `photo` field), square and around 512px. Replace the file to change it; if it
   is ever missing the avatar falls back to initials rather than breaking.

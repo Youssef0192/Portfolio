@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import Avatar from "@/app/components/Avatar";
+import Hobbies from "@/app/components/Hobbies";
 import Tree from "@/app/components/Tree";
 import {
   categories,
@@ -12,6 +13,7 @@ import {
 } from "@/app/lib/tree";
 
 const TREE_TAB = "tree";
+const HOBBIES_TAB = "hobbies";
 
 const tabs = [
   ...categories.map((category) => ({
@@ -133,7 +135,7 @@ export default function Profile() {
 
           <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
             <a
-              href="/cv/"
+              href="/cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full bg-accent px-4 py-1.5 font-mono text-xs text-white transition-opacity hover:opacity-85"
@@ -201,7 +203,9 @@ export default function Profile() {
             </div>
           </div>
         ) : activeCategory && (activeCategory.children ?? []).length > 0 ? (
-          (activeCategory.children ?? []).every(isPlain) ? (
+          active === HOBBIES_TAB ? (
+            <Hobbies hobbies={activeCategory.children ?? []} />
+          ) : (activeCategory.children ?? []).every(isPlain) ? (
             <ul className="flex flex-wrap gap-2.5">
               {(activeCategory.children ?? []).map((entry) => (
                 <li
