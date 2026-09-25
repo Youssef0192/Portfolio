@@ -132,7 +132,13 @@
             "org": "University of British Columbia",
             "date": "Sep 2025 – May 2030 (Expected)",
             "tags": ["88.5% average"],
-            "children": []
+            "children": [
+              { "id": "edu-ubc-1", "label": "Computation, Programs, and Programming", "type": "detail" },
+              { "id": "edu-ubc-2", "label": "Models of Computation", "type": "detail" },
+              { "id": "edu-ubc-3", "label": "Software Construction", "type": "detail" },
+              { "id": "edu-ubc-4", "label": "Introduction to Computer Systems", "type": "detail" },
+              { "id": "edu-ubc-5", "label": "Basic Algorithms and Data Structures", "type": "detail" }
+            ]
           }
         ]
       },
@@ -141,8 +147,32 @@
         "label": "Hobbies",
         "type": "category",
         "children": [
-          { "id": "hobby-fishing", "label": "Fishing", "type": "item", "icon": "fishing", "images": [] },
-          { "id": "hobby-cooking", "label": "Cooking", "type": "item", "icon": "cooking", "images": [] },
+          {
+            "id": "hobby-fishing",
+            "label": "Fishing",
+            "type": "item",
+            "icon": "fishing",
+            "images": [
+              { "src": "/hobbies/fishing-1.jpg", "alt": "Holding up a large barracuda caught off the back of a boat" },
+              { "src": "/hobbies/fishing-2.jpg", "alt": "A night trip's haul of tuna and grouper laid out on deck" },
+              { "src": "/hobbies/fishing-3.jpg", "alt": "A fishing kayak rigged with two rods, pulled up on the beach" },
+              { "src": "/hobbies/fishing-4.jpg", "alt": "A squid held up on a jig against the shoreline" },
+              { "src": "/hobbies/fishing-5.jpg", "alt": "A mixed catch of snapper, grouper and king mackerel laid out on a boat deck" }
+            ]
+          },
+          {
+            "id": "hobby-cooking",
+            "label": "Cooking",
+            "type": "item",
+            "icon": "cooking",
+            "images": [
+              { "src": "/hobbies/cooking-1.jpg", "alt": "A whole roasted lamb over rice, family-style on a large platter" },
+              { "src": "/hobbies/cooking-2.jpg", "alt": "Rack of lamb roasted over rice with grilled scallions" },
+              { "src": "/hobbies/cooking-3.jpg", "alt": "A sliced steak, seared and resting on a board" },
+              { "src": "/hobbies/cooking-4.jpg", "alt": "Sliced steak over a vegetable lo mein in the pan" },
+              { "src": "/hobbies/cooking-5.jpg", "alt": "Roast chicken over spiced rice with almonds and grilled peppers" }
+            ]
+          },
           {
             "id": "hobby-skiing",
             "label": "Skiing",

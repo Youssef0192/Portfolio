@@ -41,7 +41,7 @@ function OutboundLink({
       aria-label={title ? `${title}: ${linkText(href)}` : undefined}
       className={className}
     >
-      {linkText(href)} ↗
+      {title ?? linkText(href)} ↗
     </a>
   );
 }
@@ -133,12 +133,12 @@ export default function Profile() {
             </p>
           )}
 
-          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="mt-4 flex flex-nowrap items-center gap-3 overflow-x-auto">
             <a
               href="/cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-accent px-4 py-1.5 font-mono text-xs text-white transition-opacity hover:opacity-85"
+              className="shrink-0 whitespace-nowrap rounded-full bg-accent px-4 py-1.5 font-mono text-xs text-white transition-opacity hover:opacity-85"
             >
               read my cv ↗
             </a>
@@ -147,7 +147,7 @@ export default function Profile() {
                 key={contact.href}
                 href={contact.href}
                 title={contact.label}
-                className="font-mono text-xs text-ink-faint underline underline-offset-2 transition-colors hover:text-accent"
+                className="shrink-0 whitespace-nowrap font-mono text-xs text-ink-faint underline underline-offset-2 transition-colors hover:text-accent"
               />
             ))}
           </div>
