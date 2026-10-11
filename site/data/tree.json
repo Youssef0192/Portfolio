@@ -15,40 +15,28 @@
         "type": "category",
         "children": [
           {
+            "id": "exp-seen",
+            "label": "Software Developer (AI Analytics & DevOps)",
+            "type": "item",
+            "org": "Seen Education",
+            "date": "Aug 2026 – Present",
+            "tags": ["Python", "AWS", "Terraform"],
+            "children": [
+              { "id": "exp-seen-1", "label": "Developed a Python platform that analyzes and benchmarks student performance across grades, schools, and national datasets, including automated scale score calculations and statistical comparisons", "type": "detail" },
+              { "id": "exp-seen-2", "label": "Automated client-ready school reports (charts, comparisons, executive summaries) for non-technical stakeholders", "type": "detail" },
+              { "id": "exp-seen-3", "label": "Provisioning AWS infrastructure with Terraform (Infrastructure as Code) to support a hosted deployment across schools throughout the Middle East, serving thousands of students", "type": "detail" }
+            ]
+          },
+          {
             "id": "exp-roots-ontology",
-            "label": "Ontology Researcher & Info Architect",
+            "label": "Ontology Researcher & Information Architect",
             "type": "item",
             "org": "Roots Solutions & Automation",
             "date": "May – Aug 2026",
             "tags": ["Ontology", "AI", "Data Modeling"],
             "children": [
-              { "id": "exp-roots-ontology-1", "label": "Universal ontology as an AI context layer", "type": "detail" },
-              { "id": "exp-roots-ontology-2", "label": "Cross-industry org structure framework for AI", "type": "detail" }
-            ]
-          },
-          {
-            "id": "exp-seen-ai",
-            "label": "AI Analytics Tool Developer",
-            "type": "item",
-            "org": "SEEN Education",
-            "date": "Aug 2026 – Present",
-            "tags": ["Python"],
-            "children": [
-              { "id": "exp-seen-ai-1", "label": "Student performance benchmarking platform", "type": "detail" },
-              { "id": "exp-seen-ai-2", "label": "Automated scale scores & statistical comparisons", "type": "detail" },
-              { "id": "exp-seen-ai-3", "label": "Client-ready visual reports", "type": "detail" }
-            ]
-          },
-          {
-            "id": "exp-seen-devops",
-            "label": "DevOps",
-            "type": "item",
-            "org": "SEEN Education",
-            "date": "Aug 2026 – Present",
-            "tags": ["AWS", "Terraform"],
-            "children": [
-              { "id": "exp-seen-devops-1", "label": "Infrastructure provisioning via Terraform (IaC)", "type": "detail" },
-              { "id": "exp-seen-devops-2", "label": "Middle East multi-school deployment infrastructure", "type": "detail" }
+              { "id": "exp-roots-ontology-1", "label": "Translated how organizations operate (their people, assets, documents, operations, events, commitments, and transactions) into a universal ontology that serves as a structured context layer for AI", "type": "detail" },
+              { "id": "exp-roots-ontology-2", "label": "Developed a framework with formal, reusable definitions enabling AI to understand organizational structure, relationships, and processes across different companies and industries", "type": "detail" }
             ]
           },
           {
@@ -59,8 +47,8 @@
             "date": "Jun 2022 – Jul 2024",
             "tags": ["Computer Vision", "3D Reconstruction"],
             "children": [
-              { "id": "exp-roots-intern-1", "label": "Multi-view 3D reconstruction research for a multi-camera rig", "type": "detail" },
-              { "id": "exp-roots-intern-2", "label": "Industrial site visits — Egypt & UAE", "type": "detail" }
+              { "id": "exp-roots-intern-1", "label": "Visited industrial sites across Egypt and the UAE to document operational issues and planned automation", "type": "detail" },
+              { "id": "exp-roots-intern-2", "label": "Researched multi-view 3D reconstruction methods for a proposed multi-camera rig that scans parts as they move", "type": "detail" }
             ]
           }
         ]
@@ -74,50 +62,81 @@
             "id": "proj-valet",
             "label": "Valet Parking App",
             "type": "item",
+            "org": "Software Construction (Academic)",
             "date": "Jan – Apr 2026",
-            "tags": ["Java", "JUnit 5", "Java Swing", "UML"],
+            "tags": ["Java", "JUnit 5", "n8n", "Supabase"],
             "children": [
-              { "id": "proj-valet-1", "label": "Java Swing GUI + console UI sharing one model", "type": "detail" },
-              { "id": "proj-valet-2", "label": "Check-in, slot allocation, retrieval, real-time wait estimation", "type": "detail" },
-              { "id": "proj-valet-3", "label": "High JUnit 5 coverage across model & persistence layers", "type": "detail" },
-              { "id": "proj-valet-4", "label": "UML class diagram — associations, multiplicities, interfaces", "type": "detail" }
+              { "id": "proj-valet-1", "label": "Developed a Java desktop application with a Swing GUI and console UI backed by the same model, supporting vehicle check-in, slot allocation, retrieval, and real-time wait time estimation", "type": "detail" },
+              { "id": "proj-valet-2", "label": "Achieved high JUnit 5 test coverage across model and persistence layers and documented the architecture in UML", "type": "detail" },
+              { "id": "proj-valet-3", "label": "Built an event-driven n8n workflow that updates vehicle records in Supabase as cars enter or leave", "type": "detail" }
             ]
           },
           {
             "id": "proj-hr",
             "label": "HR Screening Automation",
             "type": "item",
+            "org": "Personal project",
             "date": "May 2026",
-            "tags": ["n8n", "Docker", "API Automation"],
+            "tags": ["n8n", "Docker", "APIs"],
             "children": [
-              { "id": "proj-hr-1", "label": "Email-monitoring workflow parses incoming resumes", "type": "detail" },
-              { "id": "proj-hr-2", "label": "Structured candidate data against selection criteria", "type": "detail" }
-            ]
-          },
-          {
-            "id": "proj-parking",
-            "label": "Parking Lot Management Database Automation",
-            "type": "item",
-            "date": "Jun 2026",
-            "tags": ["n8n", "Supabase", "Twilio", "Docker"],
-            "children": [
-              { "id": "proj-parking-1", "label": "n8n workflow updates vehicle records on entry/exit", "type": "detail" },
-              { "id": "proj-parking-2", "label": "Supabase sync for operational data", "type": "detail" },
-              { "id": "proj-parking-3", "label": "Twilio notifications", "type": "detail" },
-              { "id": "proj-parking-4", "label": "Self-hosted n8n in Docker — persistent volumes, env config", "type": "detail" }
-            ]
-          },
-          {
-            "id": "proj-amazon",
-            "label": "Amazon Robotics Hackathon",
-            "type": "item",
-            "date": "Sep 2026",
-            "tags": ["Python", "Optimization"],
-            "children": [
-              { "id": "proj-amazon-1", "label": "14th of 49 teams", "type": "detail" },
-              { "id": "proj-amazon-2", "label": "Benchmarked multiple algorithms minimizing robot step count/runtime", "type": "detail" }
+              { "id": "proj-hr-1", "label": "Automated an HR intake process: the workflow monitors incoming emails for resumes, transforms them into structured candidate records, and screens applications against specified selection criteria", "type": "detail" }
             ]
           }
+        ]
+      },
+      {
+        "id": "extracurriculars",
+        "label": "Extracurriculars",
+        "type": "category",
+        "children": [
+          {
+            "id": "xc-rogers",
+            "label": "Rogers x Databricks Hackathon",
+            "type": "item",
+            "org": "UBC, Vancouver",
+            "date": "Sep 2026",
+            "tags": ["Databricks", "PySpark", "SQL", "Python", "Next.js", "FastAPI"],
+            "children": [
+              { "id": "xc-rogers-1", "label": "Co-built CrowdCost with a 5-person team: a Next.js/TypeScript and FastAPI console that flags transit surges at UBC, Waterfront, and Park Royal 1 hour ahead (82% caught in a backtest) and recommends moving spare buses", "type": "detail" },
+              { "id": "xc-rogers-2", "label": "Built a 9-task Databricks pipeline in PySpark and SQL over 21.5M cell-tower pings and TransLink data that cleaned the data our surge model trained on, plus a LightGBM forecaster (MLflow) and a SciPy bus optimizer", "type": "detail" },
+              { "id": "xc-rogers-3", "label": "Placed 4th after pitching a live demo to judges from TransLink, PwC, Databricks, Rogers, West Vancouver, and UBC", "type": "detail" }
+            ]
+          },
+          {
+            "id": "xc-tcairem",
+            "label": "T-CAIREM National Health Datathon",
+            "type": "item",
+            "org": "UBC, Vancouver",
+            "date": "Oct 2026",
+            "tags": ["Python", "XGBoost"],
+            "children": [
+              { "id": "xc-tcairem-1", "label": "Modeled ICU-transfer risk from the first 8 hours of an admission with a 9-person team from pharmacy, medicine, and data science, using 22,000+ de-identified St. Michael's Hospital inpatient encounters", "type": "detail" },
+              { "id": "xc-tcairem-2", "label": "Co-built the XGBoost model (ROC-AUC 0.743) in a secure research environment, after the team widened scope to all general internal medicine patients because stroke and 24-hour subsets were too small", "type": "detail" }
+            ]
+          },
+          {
+            "id": "xc-amazon",
+            "label": "Amazon Robotics Hackathon",
+            "type": "item",
+            "org": "UBC, Vancouver",
+            "date": "Sep 2026",
+            "tags": ["Python", "Dijkstra"],
+            "children": [
+              { "id": "xc-amazon-1", "label": "Placed 14th of 49 teams (team of 4) on a real-world problem set by Amazon Robotics engineers: routing warehouse robots that carry inventory pods to pick stations, scored on delivery speed across hidden test cases", "type": "detail" },
+              { "id": "xc-amazon-2", "label": "Benchmarked multiple routing strategies in pure Python and shipped a congestion-aware Dijkstra planner that predicts when busy aisles clear, with greedy robot-to-pod assignment, batched pickups, and dock clearing", "type": "detail" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "skills",
+        "label": "Skills",
+        "type": "category",
+        "children": [
+          { "id": "skill-languages", "label": "Languages", "type": "item", "tags": ["Java", "Python", "SQL", "R", "C", "C++"] },
+          { "id": "skill-workflow", "label": "Workflow & Integration", "type": "item", "tags": ["n8n workflow automation", "REST API integration", "Supabase", "Twilio"] },
+          { "id": "skill-cloud", "label": "Cloud & Data", "type": "item", "tags": ["AWS", "Databricks", "Terraform (Infrastructure as Code)", "Docker", "Linux"] },
+          { "id": "skill-tools", "label": "Tools & Practices", "type": "item", "tags": ["Git", "JUnit 5", "UML", "technical documentation", "Java Swing", "Microsoft Office"] }
         ]
       },
       {
